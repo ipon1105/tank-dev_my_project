@@ -20,7 +20,6 @@ import java.util.Vector;
 public class Lobby {
     private JFrame frame;
     private Canvas content;
-    private JPanel contentPanel;
 
     private Graphics2D graphics;
     private TextureAtlas atlas;
@@ -44,7 +43,6 @@ public class Lobby {
     private void createMenu(){
         frame.getContentPane().removeAll();
 
-        contentPanel = new JPanel(new BorderLayout());
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel leftPanel = new JPanel(new GridBagLayout());
 
@@ -88,16 +86,11 @@ public class Lobby {
 
             mainPanel.add(leftPanel, BorderLayout.WEST);
         }
-        contentPanel.add(content);
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
 
-        frame.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent evt) {
-                content.setPreferredSize(mainPanel.getPreferredSize());
-                draw();
-                System.out.println(frame.getSize());
-            }
-        });
+        mainPanel.add(content, BorderLayout.CENTER);
+
+        mainPanel.setBackground(new Color(Game.CLEAR_COLOR));
+        leftPanel.setBackground(new Color(Game.CLEAR_COLOR));
 
         frame.getContentPane().add(mainPanel);
         frame.pack();
@@ -112,8 +105,8 @@ public class Lobby {
         if (map == null)
             return;
 
-        int kcol = Math.round(content.getWidth() / (map[0].length));
-        int krow = Math.round(content.getHeight()  / (map.length));
+        int krow = (int) Math.ceil((double) content.getHeight() / (double) map.length) - 1;
+        int kcol = (int) Math.ceil((double) content.getWidth() / (double) map[0].length) - 1;
 
         BufferedImage a = atlas.cut(0, 0, 84, 84);
         BufferedImage b = atlas.cut(2 * 84, 3 * 84, 84, 84);
@@ -152,6 +145,7 @@ public class Lobby {
                 }
             }
         }
+
         Display.swapBuffers();
     }
 

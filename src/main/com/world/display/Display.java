@@ -5,7 +5,9 @@ import main.com.world.IO.Input;
 import main.com.world.game.Game;
 import main.com.world.setting.Setting;
 import main.com.world.utils.ResourceLoader;
+import main.com.world.utils.Utils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public abstract class Display{
@@ -36,12 +40,14 @@ public abstract class Display{
     public static void createDisplay(){
 
         window = new JFrame("Танки 2");
+        window.setResizable(false);
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setPreferredSize(new Dimension(Setting.WIDTH, Setting.HEIGHT));
         window.setIconImage(ResourceLoader.loadImage("icon.png"));
 
         createMenu();
+        window.getContentPane().setBackground(Color.DARK_GRAY);
 
         window.pack();
         window.setVisible(true);
@@ -51,7 +57,7 @@ public abstract class Display{
         window.getContentPane().removeAll();
 
         final JPanel menuPanel = new JPanel();
-        final JPanel leftPanel = new JPanel();
+        final PicPanel leftPanel = new PicPanel("img.png");
 
         final Font F = new Font("TimesRoman",Font.BOLD, 22);
         final JButton btnStartGame = new JButton("Играть");
@@ -107,6 +113,8 @@ public abstract class Display{
         leftPanel.add(space2, c);
 
         menuPanel.add(leftPanel, BorderLayout.CENTER);
+
+        //leftPanel.setBackground(new Color(Game.CLEAR_COLOR));
 
         window.getContentPane().add(menuPanel);
         window.pack();
@@ -188,10 +196,7 @@ public abstract class Display{
     static class clickStart implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            //temp
             content = new Canvas();
-            content.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
 
             Lobby mc = new Lobby(window, content);
             mc.run();
@@ -199,7 +204,6 @@ public abstract class Display{
             contentService();
             mc.setGraphics(getGraphics());
             return;
-            //endtemp
 
         }
     }
@@ -261,5 +265,31 @@ public abstract class Display{
 
         cA.update(getGraphics());
         cB.update(getGraphics());
+    }
+
+}
+
+
+class PicPanel extends JPanel{
+
+    private BufferedImage image;
+    private int w,h;
+    public PicPanel(String fname){
+
+        //reads the image
+
+        image = ResourceLoader.loadImage(fname);
+        w = image.getWidth();
+        h = image.getHeight();
+
+    }
+
+    public Dimension getPreferredSize() {
+        return new Dimension(w,h);
+    }
+    //this will draw the image
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(image,0,0,this);
     }
 }

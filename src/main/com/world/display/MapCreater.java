@@ -338,8 +338,6 @@ public class MapCreater {
                 size = Integer.parseInt(editTextSize.getText());
 
                 krow = (int) Math.round((double) content.getHeight() / (double) size);
-                kcol = (int) Math.round((double) content.getWidth() / (double) size);
-
                 kcol = krow;
 
                 ImageResize(krow, kcol);
