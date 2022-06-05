@@ -5,9 +5,10 @@ import main.com.world.IO.Input;
 import main.com.world.game.Game;
 import main.com.world.setting.Setting;
 import main.com.world.utils.ResourceLoader;
-import main.com.world.utils.Utils;
 
-import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,11 +16,45 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 
-public abstract class Display{
+public abstract class Display {
+
+    public static void playSound(int type) {
+        new Thread(new Runnable() {
+            String url = null;
+
+            public void run() {
+
+                switch (type) {
+                    case 1:
+                        url = "boom.wav";
+                        break;
+                    case 2:
+                        url = "shoot.wav";
+                        break;
+                    case 3:
+                        url = "win.wav";
+                        break;
+                    case 4:
+                        break;
+
+                }
+
+                try {
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                            Display.class.getResourceAsStream("/resource/sound/" + url));
+                    clip.open(inputStream);
+                    clip.start();
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }).start();
+    }
+
+
     private static JFrame window;
     private static Canvas content;
     private static BufferedImage buffer;
@@ -270,11 +305,13 @@ public abstract class Display{
 }
 
 
-class PicPanel extends JPanel{
+class PicPanel extends JPanel {
 
-    private BufferedImage image;
-    private int w,h;
-    public PicPanel(String fname){
+    private final BufferedImage image;
+    private final int w;
+    private final int h;
+
+    public PicPanel(String fname) {
 
         //reads the image
 

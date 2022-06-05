@@ -2,9 +2,10 @@ package main.com.world.game.Players;
 
 import main.com.world.Counter;
 import main.com.world.IO.Input;
+import main.com.world.display.Display;
+import main.com.world.game.Game;
 import main.com.world.game.GameClient;
 import main.com.world.game.Players.bullet.BulletManager;
-import main.com.world.game.Game;
 import main.com.world.game.Players.viewer.ImageViewer;
 import main.com.world.game.level.FieldMap;
 import main.com.world.online.Server;
@@ -21,17 +22,17 @@ public class Player extends GameObjects {
 
 
     private BulletManager bulletManager;
-    private ImageViewer viewer;
+    private final ImageViewer viewer;
     private float newX;
     private float newY;
     private float ReloadTime = 100;
     private int bulletMod = 2;
     private int nowTime;
-    private Controller controller;
-    private byte colorTank;
+    private final Controller controller;
+    private final byte colorTank;
 
-    public Player(float speed, float scale, ImageViewer viewer, FieldMap lvl, Controller controller){
-        super(0,0,null);
+    public Player(float speed, float scale, ImageViewer viewer, FieldMap lvl, Controller controller) {
+        super(0, 0, null);
         this.colorTank = controller.getColor();
         this.x = x;
         this.y = y;
@@ -46,7 +47,7 @@ public class Player extends GameObjects {
         image = viewer.getNowImage(0);
     }
     public void setsSpawn(){
-        float res[];
+        float[] res;
         switch (colorTank){
             case 0:
                 res = m.getSpawnA();
@@ -155,6 +156,7 @@ public class Player extends GameObjects {
         bulletMod = 3;
         ReloadTime = Setting.C_BULLET_COOLDOWN;}
     public void Shoot(){
+        Display.playSound(2);
         if (GameClient.Client.getRun()) GameClient.Client.setData(8);
         if (Server.getRun()) Server.setData(8);
         nowTime = 0;
@@ -190,6 +192,7 @@ public class Player extends GameObjects {
     public void update(Input input, int a) {
         if (!life) {
             if (!viewer.BoomStart()) {
+                Display.playSound(1);
                 viewer.StartExplosion();
             }
 
@@ -252,6 +255,7 @@ public class Player extends GameObjects {
     public void update(Input input) {
         if (!life) {
             if (!viewer.BoomStart()) {
+                Display.playSound(1);
                 viewer.StartExplosion();
             }
 
@@ -287,6 +291,7 @@ public class Player extends GameObjects {
     public void update(Input input, GameClient.Client client) {
         if (!life) {
             if (!viewer.BoomStart()) {
+                Display.playSound(1);
                 viewer.StartExplosion();
             }
 
@@ -325,7 +330,7 @@ public class Player extends GameObjects {
     }
 
     public String getInfo() {
-        return ("Игрок;\t Х = " + String.valueOf(getX()) + ";\t Y = " + String.valueOf(getY()) + ";\t X2 = " + String.valueOf(getX2()) + ";\t Y2 = " + String.valueOf(getY2()) + ";");
+        return ("Игрок;\t Х = " + getX() + ";\t Y = " + getY() + ";\t X2 = " + getX2() + ";\t Y2 = " + getY2() + ";");
     }
 
     public int getWidth(){

@@ -18,8 +18,8 @@ public abstract class Setting {
     //FieldMap settings
     public static float FIELD_IN_SCALE = 0.25f;
     public static final float FIELD_ON_ATLAS = 84f;
-    public static final float FIELD_ON_ONE = FIELD_ON_ATLAS*FIELD_IN_SCALE;
-    public static final String FILENAME = "/resource/levels/level_2.lvl";
+    public static final float FIELD_ON_ONE = FIELD_ON_ATLAS * FIELD_IN_SCALE;
+    public static final String FILENAME = "/resource/levels/level_1.lvl";
 
     //Bullet Type_1
     public static final float A_BULLET_SPEED = 5.0f;

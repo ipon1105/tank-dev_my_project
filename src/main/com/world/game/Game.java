@@ -5,8 +5,8 @@ import main.com.world.Counter;
 import main.com.world.IO.Input;
 import main.com.world.display.Display;
 import main.com.world.game.level.FieldMap;
-import main.com.world.utils.Time;
 import main.com.world.graphics.TextureAtlas;
+import main.com.world.utils.Time;
 
 import java.awt.*;
 
@@ -24,25 +24,29 @@ public class Game implements Runnable {
 
     public static final String ATLAS_FILENAME = "resource.png";
 
-    private int map[][];
+    private final int[][] map;
 
     private Boolean running;
     private Thread gameThread;
     private Graphics2D graphics;
-    private Input input;
-    private TextureAtlas atlas;
-    private JoinPlay play;
-    private FieldMap fieldMap;
+    private final Input input;
+    private final TextureAtlas atlas;
+    private final JoinPlay play;
+    private final FieldMap fieldMap;
 
-    public Game(int map[][]) {
+
+    int Win = 0;
+
+    public Game(int[][] map) {
         this.map = map;
 
+        Win = 0;
         running = false;
         input = new Input();
 
         atlas = new TextureAtlas(ATLAS_FILENAME);
         fieldMap = new FieldMap(atlas, map);
-        play = new JoinPlay(atlas,fieldMap);
+        play = new JoinPlay(atlas, fieldMap);
     }
 
     public synchronized void start() {
@@ -81,11 +85,19 @@ public class Game implements Runnable {
     private void render() {
         Display.clear();
 
-        if (Counter.KILL_B >= 50){
+        if (Counter.KILL_B >= 50) {
             render("Комнада B победила");
+            if (Win == 0) {
+                Display.playSound(3);
+                Win = 1;
+            }
             return;
-        } else if (Counter.KILL_A >= 50){
+        } else if (Counter.KILL_A >= 50) {
             render("Комнада A победила");
+            if (Win == 0) {
+                Display.playSound(3);
+                Win = 1;
+            }
             return;
         }
 
