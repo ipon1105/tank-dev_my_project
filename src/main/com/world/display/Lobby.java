@@ -67,6 +67,7 @@ public class Lobby {
                 levelStringList.add("3 карта");
                 levelStringList.add("4 карта");
                 levelStringList.add("5 карта");
+                levelStringList.add("6 карта");
 
                 levelList = new JComboBox<String>(levelStringList);
                 levelList.addActionListener(new Box());
@@ -166,19 +167,22 @@ public class Lobby {
                     map = null;
                     break;
                 case "1 карта":
-                    map = Utils.levelParser(Setting.FILENAME);
+                    map = Utils.levelParser("/resource/levels/level_1.lvl");
                     break;
                 case "2 карта":
-                    map = Utils.levelParser(Setting.FILENAME);
+                    map = Utils.levelParser("/resource/levels/level_2.lvl");
                     break;
                 case "3 карта":
-                    map = Utils.levelParser(Setting.FILENAME);
+                    map = Utils.levelParser("/resource/levels/level_3.lvl");
                     break;
                 case "4 карта":
-                    map = Utils.levelParser(Setting.FILENAME);
+                    map = Utils.levelParser("/resource/levels/level_4.lvl");
                     break;
                 case "5 карта":
-                    map = Utils.levelParser(Setting.FILENAME);
+                    map = Utils.levelParser("/resource/levels/level_5.lvl");
+                    break;
+                case "6 карта":
+                    map = Utils.levelParser("/resource/levels/level_6.lvl");
                     break;
             }
             draw();

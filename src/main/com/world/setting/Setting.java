@@ -22,19 +22,19 @@ public abstract class Setting {
     public static final String FILENAME = "/resource/levels/level_1.lvl";
 
     //Bullet Type_1
-    public static final float A_BULLET_SPEED = 5.0f;
-    public static final float A_BULLET_DAMAGE = 20.0f;
-    public static final float A_BULLET_COOLDOWN = 30.0f;
+    public static final float A_BULLET_SPEED = 6.0f;
+    public static final float A_BULLET_DAMAGE = 5.0f;
+    public static final float A_BULLET_COOLDOWN = 100.0f;
 
     //Bullet Type_2
     public static final float B_BULLET_SPEED = 3.0f;
-    public static final float B_BULLET_DAMAGE = 20.0f;
-    public static final float B_BULLET_COOLDOWN = 90.0f;
+    public static final float B_BULLET_DAMAGE = 15.0f;
+    public static final float B_BULLET_COOLDOWN = 50.0f;
 
     //Bullet Type_3
     public static final float C_BULLET_SPEED = 2.0f;
-    public static final float C_BULLET_DAMAGE = 20.0f;
-    public static final float C_BULLET_COOLDOWN = 20.0f;
+    public static final float C_BULLET_DAMAGE = 35.0f;
+    public static final float C_BULLET_COOLDOWN = 30.0f;
 
     //BulletSettings
     public static Boolean BULLET_HITBOX_RENDER = false;

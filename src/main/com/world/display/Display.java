@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -97,17 +98,17 @@ public abstract class Display {
         final Font F = new Font("TimesRoman",Font.BOLD, 22);
         final JButton btnStartGame = new JButton("Играть");
         final JButton btnCreateMap = new JButton("Создать карту");
-        final JButton btnOnline = new JButton("Сетевая игра");
+        //final JButton btnOnline = new JButton("Сетевая игра");
         final JButton btnExit = new JButton("Выход");
 
         btnStartGame.setFont(F);
         btnCreateMap.setFont(F);
-        btnOnline.setFont(F);
+        //btnOnline.setFont(F);
         btnExit.setFont(F);
 
         btnStartGame.addActionListener(new clickStart());
         btnCreateMap.addActionListener(new clickCreateMap());
-        btnOnline.addActionListener(new clickOnline());
+        //btnOnline.addActionListener(new clickOnline());
         btnExit.addActionListener(new clickExit());
 
         leftPanel.setLayout(new GridBagLayout());
@@ -135,14 +136,15 @@ public abstract class Display {
         c.weighty = 1;
         c.gridy = 3;
 
-        leftPanel.add(btnOnline, c);
+        //leftPanel.add(btnOnline, c);
 
-        c.weighty = 1;
-        c.gridy = 4;
 
         leftPanel.add(btnExit, c);
 
-        c.gridy = 5;
+        //c.weighty = 1;
+        c.gridy = 4;
+
+        //c.gridy = 5;
         c.weighty = 5;
 
         leftPanel.add(space2, c);
@@ -270,7 +272,7 @@ public abstract class Display {
     static class clickExit implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
         }
     }
 
