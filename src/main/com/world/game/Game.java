@@ -15,7 +15,7 @@ public class Game implements Runnable {
     public static final int HEIGHT = 630;
     public static final int WIDTH = 798;
     public static final String TITLE = "Танки";
-    public static final int CLEAR_COLOR = 0xff000000;
+    public static final int CLEAR_COLOR = 0xff404040;
     public static final int NUM_BUFFERS = 2;
 
     public static final float UPDATE_RATE = 60.0f;

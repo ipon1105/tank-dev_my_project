@@ -20,7 +20,6 @@ public class MapCreater {
     private Graphics2D graphics;
     private JFrame frame;
     private Canvas content;
-    private JPanel canvasPanel;
 
     private int xbegin, ybegin, xend, yend;
 
@@ -48,39 +47,6 @@ public class MapCreater {
     private int[][] numericMap, predMap;
 
     private JFileChooser fileChooser;
-
-
-    class MyMap extends Canvas{
-        private int map[][];
-        private int width;
-        private int height;
-
-        @Override
-        public void paint(Graphics g) {
-            super.paint(g);
-
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public MapCreater(JFrame frame, Canvas content) {
         this.content = content;
@@ -234,12 +200,6 @@ public class MapCreater {
             return;
         }
 
-        for (int i = 1; i <= size; i++)
-            graphics.drawLine(0, kcol * i, Game.WIDTH, kcol * i);
-
-        for (int i = 1; i <= size; i++)
-            graphics.drawLine(i * krow, 0, i * krow, Game.HEIGHT);
-
         renderFields();
     }
 
@@ -377,8 +337,10 @@ public class MapCreater {
             try {
                 size = Integer.parseInt(editTextSize.getText());
 
-                krow = (int) Math.round((double)content.getHeight() / (double) size);
+                krow = (int) Math.round((double) content.getHeight() / (double) size);
                 kcol = (int) Math.round((double) content.getWidth() / (double) size);
+
+                kcol = krow;
 
                 ImageResize(krow, kcol);
                 reNumeric();
