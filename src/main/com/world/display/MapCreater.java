@@ -1,6 +1,9 @@
 package main.com.world.display;
 
 import main.com.world.game.Game;
+import main.com.world.game.Players.viewer.ImageBuffer;
+import main.com.world.game.Players.viewer.Tank;
+import main.com.world.game.Players.viewer.Tile;
 import main.com.world.graphics.TextureAtlas;
 import main.com.world.utils.Utils;
 
@@ -14,6 +17,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MapCreater {
+
+    public ImageBuffer myBuffer;
+
+
+
+
+
     private int size, kcol, krow;
     private TextureAtlas atlas;
     private JTextArea editTextSize;
@@ -22,17 +32,6 @@ public class MapCreater {
     private Canvas content;
 
     private int xbegin, ybegin, xend, yend;
-
-    private BufferedImage floor_1;
-    private BufferedImage wall_1;
-    private BufferedImage wall_2;
-    private BufferedImage wall_2_1;
-    private BufferedImage wall_2_2;
-    private BufferedImage wall_2_3;
-    private BufferedImage greenBase;
-    private BufferedImage blueBase;
-    private BufferedImage blueTeam;
-    private BufferedImage greenTeam;
 
     private ArrayList<JButton> contentList;
 
@@ -55,6 +54,9 @@ public class MapCreater {
         this.content.setPreferredSize(new Dimension(500, 500));
 
         atlas = new TextureAtlas(Game.ATLAS_FILENAME);
+
+        myBuffer = new ImageBuffer(atlas);
+        myBuffer.run();
 
         size = 0;
         numericMap = new int[1][1];
@@ -111,10 +113,8 @@ public class MapCreater {
                 contentList.add(setImage(0,0, new clickFloor()));
                 contentList.add(setImage(new clickWall2()));
                 contentList.add(setImage(168,252, new clickWall1()));
-                contentList.add(setImage(84,0, new clickBlueTeam()));
-                contentList.add(setImage(84,84, new clickGreenTeam()));
-                //contentList.add(setImage(6 * 84, 168, new clickBlueBase()));
-                //contentList.add(setImage(7 * 84, 168, new clickGreenBase()));
+                contentList.add(setImage(84,0, new clickGreenTeam()));
+                contentList.add(setImage(84,84, new clickBlueTeam()));
 
                 for (JButton panel : contentList) {
                     scrContentPanel.add(panel);
@@ -208,28 +208,28 @@ public class MapCreater {
             for (int j = 0; j < numericMap[i].length; j++) {
                 switch (numericMap[i][j]) {
                     case 0:
-                        graphics.drawImage(floor_1, j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tile.Floor), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 1:
-                        graphics.drawImage(wall_1, j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tile.BrickWall), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 2:
-                        graphics.drawImage(wall_2,    j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tile.SteelWall),    j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 3:
-                        graphics.drawImage(floor_1, j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tile.Floor), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 4:
-                        graphics.drawImage(greenTeam,  j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tank.UP_1, true),  j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 5:
-                        graphics.drawImage(blueTeam, j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tank.UP_1, false), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 6:
-                        graphics.drawImage(greenBase,  j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tank.UP_1, true),  j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 7:
-                        graphics.drawImage(blueBase,  j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Tank.UP_1, false),  j * kcol, i * krow, kcol, krow, null);
                         break;
                     default:
                 }
@@ -266,34 +266,12 @@ public class MapCreater {
                     newNumericMap[i][j] = numericMap[i][j];
 
 
-        predMap = new int[size][size];
-        numericMap = new int[size][size];
         numericMap = newNumericMap;
         predMap = numericMap;
     }
 
-    private void ImageResize(int krow, int kcol) {
-        BufferedImage a = atlas.cut(0, 0, 84, 84);
-        BufferedImage b = atlas.cut(2 * 84, 3 * 84, 84, 84);
-        BufferedImage c = atlas.cut("wall.png", 0, 0, 1754, 1753);
-        BufferedImage c_1 = atlas.getImage("wall_changes_1.png");
-        BufferedImage c_2 = atlas.getImage("wall_changes_2.png");
-        BufferedImage c_3 = atlas.getImage("wall_changes_3.png");
-        BufferedImage bb = atlas.cut(6 * 84, 2 * 84, 84, 84);
-        BufferedImage gb = atlas.cut(7 * 84, 2 * 84, 84, 84);
-        BufferedImage bbt = atlas.cut(1 * 84, 0 * 84, 84, 84);
-        BufferedImage gbt = atlas.cut(1 * 84, 1 * 84, 84, 84);
-
-        this.floor_1 =    Utils.resize(a, kcol, krow);
-        this.wall_1 =     Utils.resize(b, kcol, krow);
-        this.wall_2 =     Utils.resize(c, kcol, krow);
-        this.wall_2_1 = Utils.resize(c_1, kcol, krow);
-        this.wall_2_2 = Utils.resize(c_2, kcol, krow);
-        this.wall_2_3 = Utils.resize(c_3, kcol, krow);
-        this.greenBase = Utils.resize(gb, kcol, krow);
-        this.blueBase =  Utils.resize(bb, kcol, krow);
-        this.greenTeam = Utils.resize(gbt, kcol, krow);
-        this.blueTeam =  Utils.resize(bbt, kcol, krow);
+    private void ImageResize(int s) {
+        myBuffer.resize(s);
     }
 
     class clickSave implements ActionListener{
@@ -337,10 +315,11 @@ public class MapCreater {
             try {
                 size = Integer.parseInt(editTextSize.getText());
 
+                int s = 0;
                 krow = (int) Math.round((double) content.getHeight() / (double) size);
-                kcol = krow;
+                s = kcol = krow;
 
-                ImageResize(krow, kcol);
+                ImageResize(s);
                 reNumeric();
             } catch (Exception em) {
                 render("Что то не так. Попробуй ещё.");
@@ -362,14 +341,14 @@ public class MapCreater {
     class clickWall1 implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            nowImage = 1;
+            nowImage = 2;
         }
     }
 
     class clickWall2 implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            nowImage = 2;
+            nowImage = 1;
         }
     }
 

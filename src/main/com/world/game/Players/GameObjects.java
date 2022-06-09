@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 public class GameObjects extends HitBox {
     public float x;
     public float y;
+
     public float x2;
     public float y2;
 
@@ -51,4 +52,7 @@ public class GameObjects extends HitBox {
     public Boolean Collision(GameObjects G){
         return (((x<=G.getX2())&&(G.getX2()<=getX2())||(x<=G.getX())&&(G.getX()<=getX2()))&&((getY2()>=G.getY())&&(G.getY()>=y)||(getY2()>=G.getY2())&&(G.getY2()>=y)));
     }
+
+
+
 }

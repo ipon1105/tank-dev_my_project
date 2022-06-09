@@ -6,7 +6,7 @@ import main.com.world.utils.Utils;
 import java.awt.image.BufferedImage;
 
 public class ImageViewer {
-    public final int SIZE = 84;
+    protected final int SIZE = 84;
 
     public BufferedImage[][] Tank;
     public float speed = 0.1f;

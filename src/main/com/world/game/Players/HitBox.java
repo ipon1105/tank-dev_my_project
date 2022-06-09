@@ -1,8 +1,12 @@
 package main.com.world.game.Players;
 
+import main.com.world.game.HitBoxDraw;
+
 import java.awt.*;
 
-public class HitBox {
+
+
+public abstract class HitBox implements HitBoxDraw {
 
     public Boolean hitBox;
 
@@ -17,4 +21,10 @@ public class HitBox {
     public Boolean getHitBox(){
         return this.hitBox;
     }
+
+
+
+
+
 }
+

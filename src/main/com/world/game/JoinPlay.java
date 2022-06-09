@@ -18,11 +18,7 @@ import java.util.ArrayList;
 
 public class JoinPlay {
     public BulletManager bulletManager;
-    public ArrayList<Bullet> bulletsList_A;
-    public ArrayList<Bullet> bulletsList_B;
     public float FFF = 0;
-    public static int killA= 0;
-    public static int killB= 0;
     private Player A;
     private Player B;
 
