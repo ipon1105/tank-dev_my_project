@@ -40,7 +40,7 @@ public class GameServer implements Runnable {
         input = new Input();
 
         atlas = new TextureAtlas(ATLAS_FILENAME);
-        fieldMap = new FieldMap(atlas);
+        fieldMap = new FieldMap();
         play = new JoinPlayServer(atlas,fieldMap,server);
     }
 

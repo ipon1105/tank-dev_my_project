@@ -7,14 +7,14 @@ import main.com.world.setting.Setting;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends GameObjects {
-    public float speed;
+    public int speed;
     private float damage;
     private float cooldown;
     public int compass;
     private Boolean live;
     private FieldMap lvl;
 
-    public Bullet(float x, float y, int typeB,int compass, BufferedImage image, FieldMap lvl) {
+    public Bullet(int x, int y, int typeB,int compass, BufferedImage image, FieldMap lvl) {
         super(x,y,image);
         this.lvl = lvl;
         this.compass = compass;
@@ -60,5 +60,10 @@ public class Bullet extends GameObjects {
 
     public int getDamage(){
         return (int)damage;
+    }
+
+    public void move(int x, int y){
+        this.x += x;
+        this.y += y;
     }
 }

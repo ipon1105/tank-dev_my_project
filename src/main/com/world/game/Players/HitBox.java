@@ -6,21 +6,8 @@ import java.awt.*;
 
 
 
-public abstract class HitBox implements HitBoxDraw {
+public abstract class HitBox {
 
-    public Boolean hitBox;
-
-    public HitBox(){
-        hitBox = false;
-    }
-
-    public void setHitBox(Boolean hitBox){
-        this.hitBox = hitBox;
-    }
-
-    public Boolean getHitBox(){
-        return this.hitBox;
-    }
 
 
 

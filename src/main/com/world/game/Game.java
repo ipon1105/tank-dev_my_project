@@ -45,7 +45,7 @@ public class Game implements Runnable {
         input = new Input();
 
         atlas = new TextureAtlas(ATLAS_FILENAME);
-        fieldMap = new FieldMap(atlas, map);
+        fieldMap = new FieldMap(map);
         play = new JoinPlay(atlas, fieldMap);
     }
 

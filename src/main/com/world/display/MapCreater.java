@@ -2,8 +2,7 @@ package main.com.world.display;
 
 import main.com.world.game.Game;
 import main.com.world.game.Players.viewer.ImageBuffer;
-import main.com.world.game.Players.viewer.Tank;
-import main.com.world.game.Players.viewer.Tile;
+import main.com.world.game.Players.viewer.Texture;
 import main.com.world.graphics.TextureAtlas;
 import main.com.world.utils.Utils;
 
@@ -11,8 +10,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -208,28 +205,28 @@ public class MapCreater {
             for (int j = 0; j < numericMap[i].length; j++) {
                 switch (numericMap[i][j]) {
                     case 0:
-                        graphics.drawImage(myBuffer.get(Tile.Floor), j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.Floor), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 1:
-                        graphics.drawImage(myBuffer.get(Tile.BrickWall), j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.BrickWall), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 2:
-                        graphics.drawImage(myBuffer.get(Tile.SteelWall),    j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.SteelWall),    j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 3:
-                        graphics.drawImage(myBuffer.get(Tile.Floor), j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.Floor), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 4:
-                        graphics.drawImage(myBuffer.get(Tank.UP_1, true),  j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.gUP_1),  j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 5:
-                        graphics.drawImage(myBuffer.get(Tank.UP_1, false), j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.bUP_1), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 6:
-                        graphics.drawImage(myBuffer.get(Tank.UP_1, true),  j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.gUP_1),  j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 7:
-                        graphics.drawImage(myBuffer.get(Tank.UP_1, false),  j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.bUP_1),  j * kcol, i * krow, kcol, krow, null);
                         break;
                     default:
                 }

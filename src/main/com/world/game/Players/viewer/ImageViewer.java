@@ -1,5 +1,6 @@
 package main.com.world.game.Players.viewer;
 
+import main.com.world.display.Display;
 import main.com.world.graphics.TextureAtlas;
 import main.com.world.utils.Utils;
 
@@ -14,43 +15,18 @@ public class ImageViewer {
     public float num = 0;
     public float scale;
 
-    public BufferedImage[] explosion;
     public float BoomCounter = 0;
     public Boolean FinishBoom;
     public Boolean SatrtBoom;
 
-    public ImageViewer(TextureAtlas atlas, float scale){
+    public ImageViewer(float scale){
         this.scale = scale;
-        explosion = new BufferedImage[4];
         Tank = new BufferedImage[4][8];
-
-        setExplosion(atlas);
-        setLastExplosionImage();
 
         CleanExplosion();
         TankAnim = true;
     }
 
-    public void setLastImage() {
-        for (int i = 0; i < Tank.length; i++) {
-            for (int j = 0; j < Tank[0].length; j++) {
-                Tank[i][j] = Utils.resize(Tank[i][j], (int) (Tank[i][j].getWidth() * scale), (int) (Tank[i][j].getHeight() * scale));
-            }
-        }
-    }
-
-    public void setLastExplosionImage() {
-        for (int j = 0; j < explosion.length; j++) {
-            explosion[j] = Utils.resize(explosion[j], (int) (explosion[j].getWidth() * scale), (int) (explosion[j].getHeight() * scale));
-        }
-    }
-
-    public void setExplosion(TextureAtlas atlas) {
-        explosion[0] = atlas.cut((int) (5 * SIZE), (int) (2 * SIZE), (int) SIZE, (int) SIZE);
-        explosion[1] = atlas.cut((int) (1 * SIZE), (int) (2 * SIZE), (int) SIZE, (int) SIZE);
-        explosion[2] = atlas.cut((int) (2 * SIZE), (int) (2 * SIZE), (int) SIZE, (int) SIZE);
-        explosion[3] = atlas.cut((int) (3 * SIZE), (int) (2 * SIZE), (int) SIZE, (int) SIZE);
-    }
 
     public void update() {
 
@@ -85,7 +61,7 @@ public class ImageViewer {
     }
 
     public BufferedImage getExplosionImage() {
-        return explosion[(int) Math.floor(BoomCounter) % 4];
+        return Display.textureBuffer.get(Texture.fromOrdinal( Texture.Exp_1.ordinal() + (int) Math.floor(BoomCounter) % 4));
     }
 
     public void StartExplosion() {

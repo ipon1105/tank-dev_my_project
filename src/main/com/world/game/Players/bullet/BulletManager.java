@@ -77,16 +77,16 @@ public class BulletManager {
             if (b.getLive()) {
                 switch (b.compass) {
                     case 0:
-                        b.y -= b.speed;
+                        b.move(0, -b.speed);
                         break;
                     case 1:
-                        b.x += b.speed;
+                        b.move(b.speed, 0);
                         break;
                     case 2:
-                        b.y += b.speed;
+                        b.move(0, b.speed);
                         break;
                     case 3:
-                        b.x -= b.speed;
+                        b.move(-b.speed, 0);
                         break;
                     default: //
                 }
@@ -102,22 +102,22 @@ public class BulletManager {
         switch (A.getWay()){
             case 0:
                 image = viewer.getImage(0);
-                b = new Bullet(A.getX()+A.getWidth()/2 -image.getWidth()/2, A.getY()-viewer.getImage(0).getHeight(), bulletMod, A.getWay(), image, lvl);
+                b = new Bullet((int) (A.getX()+A.getWidth()/2 -image.getWidth()/2), (int) (A.getY()-viewer.getImage(0).getHeight()), bulletMod, A.getWay(), image, lvl);
                 break;
             case 1:
                 image = viewer.getImage(1);
-                b = new Bullet(A.getX2(), A.getY()+A.getHeight()/2-image.getHeight()/2, bulletMod,A.getWay(), image, lvl);
+                b = new Bullet((int) A.getX2(), (int) (A.getY()+A.getHeight()/2-image.getHeight()/2), bulletMod,A.getWay(), image, lvl);
                 break;
             case 2:
                 image = viewer.getImage(2);
-                b = new Bullet(A.getX()+A.getWidth()/2 -image.getWidth()/2, A.getY2(), bulletMod,A.getWay(), image, lvl);
+                b = new Bullet((int) (A.getX()+A.getWidth()/2 -image.getWidth()/2), (int) A.getY2(), bulletMod,A.getWay(), image, lvl);
                 break;
             case 3:
                 image = viewer.getImage(3);
-                b = new Bullet(A.getX()-image.getWidth(), A.getY()+A.getHeight()/2-image.getHeight()/2, bulletMod,A.getWay(), image, lvl);
+                b = new Bullet((int) (A.getX()-image.getWidth()), (int) (A.getY()+A.getHeight()/2-image.getHeight()/2), bulletMod,A.getWay(), image, lvl);
                 break;
             default: image = viewer.getImage(0);
-                    b = new Bullet(A.getX2(), A.getY(), bulletMod,A.getWay(), image, lvl);
+                    b = new Bullet((int) A.getX2(), (int) A.getY(), bulletMod,A.getWay(), image, lvl);
         }
 
         if (Setting.BULLET_HITBOX_RENDER) b.setHitBox(true);

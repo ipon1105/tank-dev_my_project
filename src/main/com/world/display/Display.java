@@ -4,6 +4,7 @@ import main.com.world.Counter;
 import main.com.world.IO.Input;
 import main.com.world.game.Game;
 import main.com.world.game.Players.viewer.ImageBuffer;
+import main.com.world.graphics.TextureAtlas;
 import main.com.world.setting.Setting;
 import main.com.world.utils.ResourceLoader;
 
@@ -21,7 +22,7 @@ import java.awt.image.DataBufferInt;
 import java.util.Arrays;
 
 public abstract class Display {
-
+    public static ImageBuffer textureBuffer;
 
 
 
@@ -74,6 +75,9 @@ public abstract class Display {
 
     public static void main(String[] args){
         game = null;
+        textureBuffer = new ImageBuffer(new TextureAtlas(Game.ATLAS_FILENAME));
+        textureBuffer.run();
+
         createDisplay();
     }
 

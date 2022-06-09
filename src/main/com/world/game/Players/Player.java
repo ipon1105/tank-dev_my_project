@@ -7,38 +7,37 @@ import main.com.world.game.Game;
 import main.com.world.game.GameClient;
 import main.com.world.game.Players.bullet.BulletManager;
 import main.com.world.game.Players.viewer.ImageViewer;
+import main.com.world.game.Players.viewer.Texture;
 import main.com.world.game.level.FieldMap;
 import main.com.world.online.Server;
 import main.com.world.setting.Setting;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class Player extends GameObjects {
     public Boolean life;
-    public float scale;
-    public float speed;
+    public int speed;
     public FieldMap m;
     public int way;
 
 
     private BulletManager bulletManager;
     private final ImageViewer viewer;
-    private float newX;
-    private float newY;
+    private int newX;
+    private int newY;
     private float ReloadTime = 100;
     private int bulletMod = 2;
     private int nowTime;
     private final Controller controller;
     private final byte colorTank;
 
-    public Player(float speed, float scale, ImageViewer viewer, FieldMap lvl, Controller controller) {
-        super(0, 0, null);
+    public Player(int speed,  ImageViewer viewer, FieldMap lvl, Controller controller) {
+        super(0, 0, (controller.getColor() == 0) ? Texture.gUP_1 : Texture.bUP_1);
         this.colorTank = controller.getColor();
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.scale = scale;
+
+        this.speed = (int) ((int )(lvl.height / 20));
         this.viewer = viewer;
         this.controller = controller;
 
@@ -48,7 +47,7 @@ public class Player extends GameObjects {
         image = viewer.getNowImage(0);
     }
     public void setsSpawn(){
-        float[] res;
+        int[] res;
         switch (colorTank){
             case 0:
                 res = m.getSpawnA();
@@ -56,7 +55,7 @@ public class Player extends GameObjects {
             case 1:
                 res = m.getSpawnB();
                 break;
-            default:res = new float[]{0,0};
+            default:res = new int[]{0,0};
             break;
         }
 
@@ -173,7 +172,8 @@ public class Player extends GameObjects {
             MoveRight();
         } else if (input.getKey(controller.getA())) {
             MoveLeft();
-        }}
+        }
+    }
 
     public void MoveUpdates(Input input) {
         MovesMode(input);
@@ -331,10 +331,6 @@ public class Player extends GameObjects {
 
     }
     //здесь всё ок
-    public void render(Graphics2D g){
-        g.drawImage(image, (int) x, (int) y, image.getWidth(), image.getHeight(), null);
-        if (hitBox) hitBoxRender(g);
-    }
 
     public String getInfo() {
         return ("Игрок;\t Х = " + getX() + ";\t Y = " + getY() + ";\t X2 = " + getX2() + ";\t Y2 = " + getY2() + ";");
