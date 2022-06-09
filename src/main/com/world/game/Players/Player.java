@@ -12,6 +12,7 @@ import main.com.world.online.Server;
 import main.com.world.setting.Setting;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Player extends GameObjects {
     public Boolean life;
@@ -201,7 +202,10 @@ public class Player extends GameObjects {
 
                 setsSpawn();
 
-                Counter.KILL_B++;
+                if (controller.SHOOT == KeyEvent.VK_SPACE)
+                    Counter.KILL_A++;
+                else
+                    Counter.KILL_B++;
                 Counter.counterPrint();
                 image = viewer.getNowImage(0);
                 life = true;
@@ -264,7 +268,10 @@ public class Player extends GameObjects {
 
                 setsSpawn();
 
-                Counter.KILL_B++;
+                if (controller.SHOOT == KeyEvent.VK_SPACE)
+                    Counter.KILL_A++;
+                else
+                    Counter.KILL_B++;
                 Counter.counterPrint();
                 image = viewer.getNowImage(0);
                 life = true;

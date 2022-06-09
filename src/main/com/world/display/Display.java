@@ -74,7 +74,6 @@ public abstract class Display {
     }
 
     public static void createDisplay(){
-
         window = new JFrame("Танки 2");
         window.setResizable(false);
 
