@@ -108,8 +108,8 @@ public class MapCreater {
                 scrContentPanel = new JPanel();
                 scrContentPanel.setLayout(new FlowLayout());
                 contentList.add(setImage(0,0, new clickFloor()));
-                contentList.add(setImage(new clickWall2()));
-                contentList.add(setImage(168,252, new clickWall1()));
+                contentList.add(setImage(new clickWall1()));
+                contentList.add(setImage(168,252, new clickWall2()));
                 contentList.add(setImage(84,0, new clickGreenTeam()));
                 contentList.add(setImage(84,84, new clickBlueTeam()));
 
@@ -208,10 +208,10 @@ public class MapCreater {
                         graphics.drawImage(myBuffer.get(Texture.Floor), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 1:
-                        graphics.drawImage(myBuffer.get(Texture.BrickWall), j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.SteelWall),    j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 2:
-                        graphics.drawImage(myBuffer.get(Texture.SteelWall),    j * kcol, i * krow, kcol, krow, null);
+                        graphics.drawImage(myBuffer.get(Texture.BrickWall), j * kcol, i * krow, kcol, krow, null);
                         break;
                     case 3:
                         graphics.drawImage(myBuffer.get(Texture.Floor), j * kcol, i * krow, kcol, krow, null);

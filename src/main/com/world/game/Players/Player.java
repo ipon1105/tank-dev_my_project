@@ -33,6 +33,10 @@ public class Player extends GameObjects {
     private final Controller controller;
     private final byte colorTank;
 
+    public int getBulletType(){
+        return bulletMod;
+    }
+
     public Player(int speed,  ImageViewer viewer, FieldMap lvl, Controller controller) {
         super(0, 0, (controller.getColor() == 0) ? Texture.gUP_1 : Texture.bUP_1);
         this.colorTank = controller.getColor();
@@ -97,6 +101,8 @@ public class Player extends GameObjects {
         way = 0;
         image = viewer.getNowImage(way);
 
+        y -= speed;
+
         if ((!m.Collision(this, way))) {
             if (GameClient.Client.getRun()) GameClient.Client.setData(1);
             if (Server.getRun()) Server.setData(1);
@@ -108,6 +114,8 @@ public class Player extends GameObjects {
         //если он идёт вправо
         way = 1;
         image = viewer.getNowImage(way);
+
+        x += speed;
 
         if ((!m.Collision(this, way))) {
             if (GameClient.Client.getRun()) GameClient.Client.setData(2);
@@ -122,6 +130,8 @@ public class Player extends GameObjects {
         way = 2;
         image = viewer.getNowImage(way);
 
+        y += speed;
+
         if ((!m.Collision(this, way))) {
             if (GameClient.Client.getRun()) GameClient.Client.setData(3);
             if (Server.getRun()) Server.setData(3);
@@ -133,10 +143,14 @@ public class Player extends GameObjects {
         way = 3;
         image = viewer.getNowImage(way);
 
+        x -= speed;
+
         if ((!m.Collision(this, way))) {
             if (GameClient.Client.getRun()) GameClient.Client.setData(4);
             if (Server.getRun()) Server.setData(4);
             newX -= speed;
+        } else {
+
         }
 
     }

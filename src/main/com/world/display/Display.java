@@ -70,8 +70,10 @@ public abstract class Display {
     public static Game game;
     private static BufferStrategy bufferStrategy;
 
-    private static JLabel cA;
-    private static JLabel cB;
+    public static JLabel cA;
+    public static JLabel cB;
+    public static JLabel bulletA;
+    public static JLabel bulletB;
 
     public static void main(String[] args){
         game = null;
@@ -173,7 +175,10 @@ public abstract class Display {
 
         JPanel pCount = new JPanel(new GridBagLayout());
         cA = new JLabel("A: Убийств: ");
+        bulletA = new JLabel("Тип пули: ");
         cB = new JLabel("B: Убийств: ");
+        bulletB = new JLabel("Тип пули: ");
+
 
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0; c.gridy = 0;
@@ -181,7 +186,11 @@ public abstract class Display {
         c.gridx = 0; c.gridy = 1;
         pCount.add(cA, c);
         c.gridx = 0; c.gridy = 2;
+        pCount.add(bulletA, c);
+        c.gridx = 0; c.gridy = 3;
         pCount.add(cB, c);
+        c.gridx = 0; c.gridy = 4;
+        pCount.add(bulletB, c);
 
         mainPanel.setLayout(new FlowLayout());
 
@@ -303,13 +312,6 @@ public abstract class Display {
         }
     }
 
-    public static void updateCount(){
-        cA.setText("A: Убийств: " + Counter.KILL_A);
-        cB.setText("B: Убийств: " + Counter.KILL_B);
-
-        cA.update(getGraphics());
-        cB.update(getGraphics());
-    }
 
 }
 

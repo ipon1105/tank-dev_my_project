@@ -34,7 +34,6 @@ public class Game implements Runnable {
     private final JoinPlay play;
     private final FieldMap fieldMap;
 
-
     int Win = 0;
 
     public Game(int[][] map) {
@@ -103,7 +102,12 @@ public class Game implements Runnable {
 
         fieldMap.render(graphics);
         play.render(graphics);
-        Display.updateCount();
+
+        Display.cA.setText("A: Убийств: " + Counter.KILL_A);
+        Display.cB.setText("B: Убийств: " + Counter.KILL_B);
+
+        Display.bulletA.setText("Тип пули: " + play.getPlayerABullet());
+        Display.bulletB.setText("Тип пули: " + play.getPlayerBBullet());
 
         Display.swapBuffers();
     }
